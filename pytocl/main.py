@@ -1,11 +1,11 @@
 """Application entry point."""
 import argparse
 import logging
-
+import multiprocessing
 from pytocl.protocol import Client
 
 
-def main(driver):
+def main(driver, NO_FRAMES, PORT, que, print_car_values=False):
     """Main entry point of application."""
     parser = argparse.ArgumentParser(
         description='Client for TORCS racing car simulation with SCRC network'
@@ -21,7 +21,7 @@ def main(driver):
         '--port',
         help='Port to connect, 3001 - 3010 for clients 1 - 10.',
         type=int,
-        default=3001
+        default=PORT
     )
     parser.add_argument('-v', help='Debug log level.', action='store_true')
     args = parser.parse_args()
@@ -39,8 +39,8 @@ def main(driver):
 
     # start client loop:
     client = Client(driver=driver, **args.__dict__)
-    client.run()
-
+    fitness, offroad_count, turn_around_count, negative_speed_count = client.run(NO_FRAMES)
+    que.put(fitness)
 
 if __name__ == '__main__':
     from pytocl.driver import Driver

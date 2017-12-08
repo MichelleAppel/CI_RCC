@@ -42,7 +42,7 @@ class DataLogWriter:
         """End logging by closing the associated file."""
         if self.logging:
             self.file.close()
-            _logger.info('Saved {} log entries.'.format(self.numlogged))
+            # _logger.info('Saved {} log entries.'.format(self.numlogged))
             self.file = None
             self.pickler = None
             self.numlogged = 0
