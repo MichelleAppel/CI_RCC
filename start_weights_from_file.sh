@@ -8,7 +8,7 @@ import subprocess
 import pickle
 
 
-path = "ea_output/output_2017-12-12 15:36:33.832452/outfile_gen17"
+path = "ea_output/output_2017-12-12 16:42:55.407269/outfile_gen10"
 
 
 # Initialize socket process
